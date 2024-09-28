@@ -1,0 +1,17 @@
+replicaCount: ${replicaCount}
+
+image:
+  repository: ${image.repository}
+  tag: ${image.tag}
+
+resources:
+  requests:
+    memory: ${resources.memory_request}
+    cpu: ${resources.cpu_request}
+  limits:
+    memory: ${resources.memory_limit}
+    cpu: ${resources.cpu_limit}
+
+tolerations: ${tolerations}
+
+affinity: ${affinity}

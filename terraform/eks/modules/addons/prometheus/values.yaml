@@ -1,0 +1,33 @@
+alertmanager:
+  enabled: ${alertmanager.enabled}
+  replicaCount: ${alertmanager.replicaCount}
+  image:
+    repository: ${alertmanager.image.repository}
+    tag: ${alertmanager.image.tag}
+
+server:
+  replicaCount: ${server.replicaCount}
+  image:
+    repository: ${server.image.repository}
+    tag: ${server.image.tag}
+  resources:
+    requests:
+      memory: ${server.resources.memory_request}
+      cpu: ${server.resources.cpu_request}
+    limits:
+      memory: ${server.resources.memory_limit}
+      cpu: ${server.resources.cpu_limit}
+  persistentVolume:
+    enabled: ${server.persistentVolume.enabled}
+    size: ${server.persistentVolume.size}
+    storageClass: ${server.persistentVolume.storageClass}
+    accessModes: ${server.persistentVolume.accessModes}
+    mountPath: ${server.persistentVolume.mountPath}
+
+additionalScrapeConfigs: ${additionalScrapeConfigs}
+
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+            - ${alerting.alertmanagers.static_configs.targets}

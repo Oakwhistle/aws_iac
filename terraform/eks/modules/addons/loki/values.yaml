@@ -1,0 +1,29 @@
+replicaCount: ${replicaCount}
+image:
+  repository: ${image.repository}
+  tag: ${image.tag}
+
+retention:
+  enabled: ${retention.enabled}
+  days: ${retention.days}
+
+ingress:
+  enabled: ${ingress.enabled}
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+  hosts:
+    - host: ${ingress.host}
+      paths:
+        - /
+  tls:
+    - hosts:
+        - ${ingress.host}
+      secretName: ${ingress.secretName}
+
+resources:
+  requests:
+    memory: ${resources.memory_request}
+    cpu: ${resources.cpu_request}
+  limits:
+    memory: ${resources.memory_limit}
+    cpu: ${resources.cpu_limit}

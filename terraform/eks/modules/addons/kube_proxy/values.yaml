@@ -1,0 +1,19 @@
+image:
+  repository: ${image.repository}
+  tag: ${image.tag}
+
+iptablesSyncPeriod: ${iptablesSyncPeriod}
+
+conntrack:
+  maxPerCore: ${conntrack.maxPerCore}
+  min: ${conntrack.min}
+  tcpTimeoutEstablished: ${conntrack.tcpTimeoutEstablished}
+  tcpTimeoutCloseWait: ${conntrack.tcpTimeoutCloseWait}
+
+resources:
+  requests:
+    memory: ${resources.memory_request}
+    cpu: ${resources.cpu_request}
+  limits:
+    memory: ${resources.memory_limit}
+    cpu: ${resources.cpu_limit}

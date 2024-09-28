@@ -1,0 +1,24 @@
+replicaCount: ${replicaCount}
+image:
+  repository: ${image.repository}
+  tag: ${image.tag}
+
+scaling:
+  enabled: ${scaling.enabled}
+  minReplicas: ${scaling.minReplicas}
+  maxReplicas: ${scaling.maxReplicas}
+
+metrics:
+  enabled: ${metrics.enabled}
+  port: ${metrics.port}
+
+resources:
+  requests:
+    memory: ${resources.memory_request}
+    cpu: ${resources.cpu_request}
+  limits:
+    memory: ${resources.memory_limit}
+    cpu: ${resources.cpu_limit}
+
+affinity: ${jsonencode(affinity)}
+tolerations: ${jsonencode(tolerations)}

@@ -1,0 +1,24 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: |
+  Create terraform backend resources
+Parameters:
+  AccountId:
+    Type: String
+    Description: Account Id from account to set
+Resources:
+  BackendBucket:
+    Type: AWS::S3::Bucket
+    DeletionPolicy: Retain
+    Properties:
+      VersioningConfiguration:
+        Status: Enabled
+      BucketName: !Sub devops-${AccountId}-terraform-state-bucket
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: True
+        BlockPublicPolicy: True
+        IgnorePublicAcls: True
+        RestrictPublicBuckets: True
+
+Outputs:
+  BackendBucket:
+    Value: !Ref BackendBucket

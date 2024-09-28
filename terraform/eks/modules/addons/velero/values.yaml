@@ -1,0 +1,26 @@
+velero_server:
+  replicaCount: ${server.replicaCount}
+  image:
+    repository: ${server.image.repository}
+    tag: ${server.image.tag}
+  resources:
+    requests:
+      memory: ${server.resources.memory_request}
+      cpu: ${server.resources.cpu_request}
+    limits:
+      memory: ${server.resources.memory_limit}
+      cpu: ${server.resources.cpu_limit}
+  persistentVolume:
+    enabled: ${server.persistentVolume.enabled}
+    size: ${server.persistentVolume.size}
+    storageClass: ${server.persistentVolume.storageClass}
+    accessModes: ${jsonencode(server.persistentVolume.accessModes)} # Convertimos listas a formato JSON
+    mountPath: ${server.persistentVolume.mountPath}
+
+configuration:
+  provider: ${configuration.provider}
+  backupStorageLocation:
+    name: ${configuration.backupStorageLocation.name}
+    bucket: ${configuration.backupStorageLocation.bucket}
+    config:
+      region: ${configuration.backupStorageLocation.config.region}

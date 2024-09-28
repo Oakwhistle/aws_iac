@@ -1,0 +1,22 @@
+replicaCount: ${replicaCount}
+image:
+  repository: ${image.repository}
+  tag: ${image.tag}
+
+webhook:
+  enabled: ${webhook.enabled}
+  serviceName: ${webhook.serviceName}
+  namespace: ${webhook.namespace}
+  port: ${webhook.port}
+
+identityConfig:
+  assumeRole: ${identityConfig.assumeRole}
+  awsRegion: ${identityConfig.awsRegion}
+
+resources:
+  requests:
+    memory: ${resources.memory_request}
+    cpu: ${resources.cpu_request}
+  limits:
+    memory: ${resources.memory_limit}
+    cpu: ${resources.cpu_limit}

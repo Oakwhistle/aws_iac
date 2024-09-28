@@ -1,0 +1,52 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: |
+  Create terraform backend resources
+Parameters:
+  AccountId:
+    Type: String
+    Description: Account Id from account to set
+  InfraType:
+    Type: String
+    Description: The type of infraestructure
+  Region:
+    Type: String
+    Default: ""
+    Description: The Region name
+  Project:
+    Type: String
+    Default: ""
+    Description: The Project name
+  Service:
+    Type: String
+    Default: ""
+    Description: The service name
+  Environment:
+    Type: String
+    Default: ""
+    Description: The Environment name
+
+Conditions:
+  isNetwork: !Equals [!Ref InfraType, network]
+
+Resources:
+  BackendDynamoDbTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !If
+      - isNetwork
+      - !Sub ${AccountId}-terraform-state-lock-${InfraType}-${Project}-${Region}
+      - !Sub ${AccountId}-terraform-state-lock-${InfraType}-${Project}-${Service}-${Environment}-${Region}
+      BillingMode: PROVISIONED
+      ProvisionedThroughput:
+        ReadCapacityUnits: 1
+        WriteCapacityUnits: 1
+      KeySchema:
+      - AttributeName: LockID
+        KeyType: HASH
+      AttributeDefinitions:
+      - AttributeName: LockID
+        AttributeType: S
+
+Outputs:
+  BackendDynamoDbTable:
+    Value: !Ref BackendDynamoDbTable

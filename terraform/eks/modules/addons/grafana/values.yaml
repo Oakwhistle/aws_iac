@@ -1,0 +1,24 @@
+replicaCount: ${replicaCount}
+image:
+  repository: ${image.repository}
+  tag: ${image.tag}
+resources:
+  requests:
+    memory: ${resources.memory_request}
+    cpu: ${resources.cpu_request}
+  limits:
+    memory: ${resources.memory_limit}
+    cpu: ${resources.cpu_limit}
+persistence:
+  storageClassName: ${persistence.storageClassName}
+  accessModes: ${jsonencode(persistence.accessModes)}
+  size: ${persistence.size}
+securityContext:
+  runAsUser: ${securityContext.runAsUser}
+  fsGroup: ${securityContext.fsGroup}
+affinity: ${jsonencode(affinity)}
+tolerations: ${jsonencode(tolerations)}
+adminUser: ${adminUser}
+adminPassword: ${adminPassword}
+service:
+  type: ${service_type}
